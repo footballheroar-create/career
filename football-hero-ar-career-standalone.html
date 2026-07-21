@@ -950,9 +950,27 @@ a { color: inherit; text-decoration: none; }
   }
 }
 
+.career-opening{position:fixed;inset:0;z-index:1000;background:#010712;display:grid;place-items:center;color:#fff}
+.career-opening[hidden]{display:none}
+.career-opening video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#010712}
+.opening-gate{position:relative;z-index:2;text-align:center;padding:32px 22px;width:min(560px,92vw);background:linear-gradient(180deg,rgba(2,10,25,.3),rgba(2,10,25,.92));border:1px solid rgba(99,221,255,.25);border-radius:24px;box-shadow:0 24px 80px #000}
+.opening-gate small{color:#63ddff;letter-spacing:.22em;font-weight:800}
+.opening-gate h2{font-size:clamp(34px,9vw,72px);line-height:.9;margin:16px 0}.opening-gate h2 span{color:#ffc13a}
+.opening-gate p{color:#b9c8dc;line-height:1.7}
+.opening-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.career-opening.is-playing .opening-gate{display:none}
+.opening-skip{position:absolute;z-index:3;right:max(16px,env(safe-area-inset-right));top:max(16px,env(safe-area-inset-top));border:1px solid rgba(255,255,255,.35);background:rgba(2,10,25,.68);color:#fff;border-radius:999px;padding:10px 16px;font-weight:800}
+@media(max-width:600px){.career-opening video{object-fit:contain}.opening-gate{border-radius:18px}.opening-actions .button{width:100%}}
 </style>
 </head>
 <body>
+<div class="career-opening" data-career-opening role="dialog" aria-modal="true" aria-label="CAREER MODE OPENING">
+<video data-opening-video src="/assets/video/career-opening-v2.mp4" playsinline preload="metadata"></video>
+<button class="opening-skip" type="button" data-opening-skip>SKIP</button>
+<div class="opening-gate"><small>FOOTBALL HERO AR</small><h2>CAREER <span>MODE</span></h2><p>現実の一球が、あなたの物語になる。</p><div class="opening-actions">
+<button class="button button-primary" type="button" data-opening-play>OPENINGを再生 ▶</button>
+<button class="button button-secondary" type="button" data-opening-skip>スキップ</button>
+</div></div></div>
   <noscript>このキャリアモードを遊ぶにはJavaScriptを有効にしてください。</noscript>
 
   <div class="app" data-app>
@@ -962,11 +980,8 @@ a { color: inherit; text-decoration: none; }
     <section class="screen screen-home is-active" data-screen="home" aria-labelledby="home-title">
       <div class="home-bg" aria-hidden="true"></div>
       <header class="home-header">
-        <a class="brand" href="#" onclick="event.preventDefault(); alert('この単体プレビューでは入口サイトへの戻るリンクは無効です。Cloudflare統合後に有効になります。')" aria-label="FOOTBALL HERO ARへ戻る">
-          <span class="brand-ball">⚽</span>
-          <span><b>FOOTBALL HERO</b><em>AR</em></span>
-        </a>
-        <div class="build-chip">STORY PROTOTYPE</div>
+        <a class="brand" href="../" aria-label="FOOTBALL HERO ARへ戻る"><span class="brand-ball">⚽</span><span><b>FOOTBALL HERO</b><em>AR</em></span></a>
+        <div class="build-chip">CHAPTER 01 TEST</div>
       </header>
 
       <div class="home-content">
@@ -974,10 +989,7 @@ a { color: inherit; text-decoration: none; }
           <p class="kicker">THE ROAD TO GLORY</p>
           <h1 id="home-title">CAREER<br><span>MODE</span></h1>
           <p class="home-lead">公園の一球から、世界の頂点へ。</p>
-          <p class="home-description">
-            現実のARチャレンジが物語を進める、FOOTBALL HERO ARのストーリーモード。
-            ボレー、1vs1、トラップ、フィジカル、パス、守備を乗り越え、世界大会決勝を目指せ。
-          </p>
+          <p class="home-description">現実のARチャレンジが物語を進める、FOOTBALL HERO ARのストーリーモード。<br>テストプレイ版では、第1章のボレーシュートチャレンジまで体験できます。</p>
 
           <label class="player-name-field">
             <span>PLAYER NAME</span>
@@ -1127,15 +1139,9 @@ a { color: inherit; text-decoration: none; }
       <div class="ending-bg"></div>
       <div class="ending-shade"></div>
       <div class="ending-content">
-        <p>CAREER MODE — PROTOTYPE ENDING</p>
-        <h2>世界の<br><span>FOOTBALL HERO</span>へ。</h2>
-        <p>
-          公園で放った最初のボレーは、世界大会決勝の一球へつながった。
-          ここから先は、新しいシーズンが始まる。
-        </p>
-        <div class="ending-actions">
+        <p>CHAPTER 02</p><h2><span>COMING SOON</span></h2><p>第1章のテストプレイはここまでです。<br>続きの物語と新しいARチャレンジは現在開発中です。</p><div class="ending-actions">
           <button class="button button-primary" type="button" data-go-home>キャリアホームへ</button>
-          <a class="button button-secondary" href="#" onclick="event.preventDefault(); alert('この単体プレビューではGAMESへの戻るリンクは無効です。Cloudflare統合後に有効になります。')">GAMESへ戻る</a>
+          <a class="button button-secondary" href="../#games">GAMESへ戻る</a>
         </div>
       </div>
     </section>
@@ -1170,7 +1176,7 @@ a { color: inherit; text-decoration: none; }
 window.FOOTBALL_HERO_CAREER_CONFIG = {
   // true: 実ゲーム未接続でも「ストーリー確認用クリア」で全編を確認できます。
   // 公開版で不要になったら false にしてください。
-  demoMode: true,
+  demoMode: false,
 
   // Football Hero AR トップへ戻るURL
   homeUrl: "../#home",
@@ -1189,7 +1195,7 @@ window.FOOTBALL_HERO_CAREER_CONFIG = {
   },
 
   // セーブデータのキー。将来仕様変更するときはV2などに変更します。
-  storageKey: "footballHeroCareerV1"
+  storageKey: "footballHeroCareerChapter1TestV1"
 };
 
 </script>
@@ -1244,8 +1250,8 @@ window.FOOTBALL_HERO_STORY = {
           label: "VOLLEY SHOOT CHALLENGE",
           title: "始まりの一球",
           copy: "限られたチャンスでボレーを決め、シュンの目を引こう。",
-          rules: ["キャリア専用", "3球限定", "1ゴール以上", "EASY"],
-          params: { mode: "career", difficulty: "easy", totalBalls: 3, requiredGoals: 1 }
+          rules: ["キャリア専用", "1ゴール以上", "EASY"],
+          params: { mode: "career", gameMode: "TARGET", difficulty: "EASY", requiredGoals: 1 }
         },
         {
           id: "p-04",
@@ -1666,6 +1672,12 @@ window.FOOTBALL_HERO_STORY = {
   ]
 };
 
+</script>
+<script>
+(()=>{const c=window.FOOTBALL_HERO_STORY.chapters[0];
+c.id="chapter-01";c.code="CHAPTER 01";c.title="始まりの一球";
+c.summary="夕暮れの公園で、ボレーシュートから物語を始めよう。";
+c.scenes=c.scenes.slice(0,3);window.FOOTBALL_HERO_STORY.chapters=[c];})();
 </script>
 <script>
 (() => {
@@ -2144,7 +2156,7 @@ window.FOOTBALL_HERO_STORY = {
     renderScene(flatScenes[state.globalSceneIndex]);
   }
 
-  function buildGameUrl(scene) {
+  function buildGameUrl(scene, selectedStage = "TRAINING") {
     const gameUrl = config.gameUrls?.[scene.game];
     if (!gameUrl) return "";
 
@@ -2154,6 +2166,7 @@ window.FOOTBALL_HERO_STORY = {
     url.searchParams.set("chapterId", scene.chapter.id);
     url.searchParams.set("sessionId", crypto.randomUUID?.() || `${Date.now()}-${Math.random().toString(16).slice(2)}`);
     url.searchParams.set("returnUrl", `${location.origin}${location.pathname}`);
+    url.searchParams.set("stage", selectedStage);
 
     Object.entries(scene.params || {}).forEach(([key, value]) => {
       url.searchParams.set(key, String(value));
@@ -2163,39 +2176,31 @@ window.FOOTBALL_HERO_STORY = {
 
   function launchChallenge() {
     if (!currentScene || currentScene.type !== "challenge") return;
-    const url = buildGameUrl(currentScene);
-    if (!url) {
-      showInfo({
-        kicker: "COMING SOON",
-        title: "ゲーム接続を準備中です",
-        copy: "career-config.js にゲームURLを設定すると、このミッションから指定条件で直接起動できます。"
-      });
-      return;
+    const openGame = (selectedStage) => {
+      if (selectedStage === "TRAINING") selectedStage = "STREET";
+      const url = buildGameUrl(currentScene, selectedStage);
+      if (!url) return;
+      state.pendingStage = currentScene.id; saveState();
+      closeDialog(refs.infoDialog); location.href = url;
+    };
+    if (!config.gameUrls?.[currentScene.game]) {
+      showInfo({ kicker: "COMING SOON", title: "ゲーム接続を準備中です", copy: "このチャレンジは現在準備中です。" }); return;
     }
-
-    state.pendingStage = currentScene.id;
-    saveState();
-
     showInfo({
       kicker: "AR CHALLENGE",
-      title: currentScene.title,
-      copy: "周囲の安全と端末の固定を確認してから開始してください。実ゲームがまだ結果返却に未対応の場合は、戻った後にデモクリアを利用できます。",
+      title: "ステージ選択",
+      copy: "ボレーシュートの背景を選んでください。難易度はEASYで開始します。",
       actions: [
-        {
-          label: "ゲームを開く",
-          kind: "primary",
-          onClick: () => {
-            closeDialog(refs.infoDialog);
-            location.href = url;
-          }
-        },
-        {
-          label: "キャンセル",
-          kind: "secondary",
-          onClick: () => closeDialog(refs.infoDialog)
-        }
+        { label: "🌳 画像あり（公園ステージ）", kind: "primary", onClick: () => openGame("TRAINING") },
+        { label: "📷 画像なし", kind: "secondary", onClick: () => openGame("NONE") },
+        { label: "戻る", kind: "secondary", onClick: () => closeDialog(refs.infoDialog) }
       ]
     });
+    const stageChoiceButtons = refs.infoActions.querySelectorAll("button");
+    if (stageChoiceButtons[0]) stageChoiceButtons[0].textContent = "画像あり（ストリート）・キーパーあり";
+    if (stageChoiceButtons[1]) stageChoiceButtons[1].textContent = "画像なし・キーパーあり";
+    if (refs.infoCopy) refs.infoCopy.textContent =
+      "背景を選んでください。どちらもEASY・キーパーありのゴールターゲットで開始します。";
   }
 
   function completeChallenge(stageId, result = {}) {
@@ -2378,6 +2383,14 @@ window.FOOTBALL_HERO_STORY = {
   if (!processReturnResult()) showScreen("home");
 })();
 
+</script>
+<script>
+(()=>{const o=document.querySelector("[data-career-opening]"),v=document.querySelector("[data-opening-video]");if(!o||!v)return;
+const key="footballHeroCareerOpeningSeenV1";const close=()=>{v.pause();o.hidden=true;try{sessionStorage.setItem(key,"1")}catch{}};
+try{if(sessionStorage.getItem(key)==="1"){o.hidden=true;return}}catch{}
+document.querySelector("[data-opening-play]").addEventListener("click",async()=>{o.classList.add("is-playing");v.currentTime=0;v.muted=false;try{await v.play()}catch{o.classList.remove("is-playing")}});
+o.querySelectorAll("[data-opening-skip]").forEach(b=>b.addEventListener("click",close));v.addEventListener("ended",close);v.addEventListener("error",close);
+})();
 </script>
 </body>
 </html>
